@@ -1,0 +1,55 @@
+﻿@model List<portfolio.Models.Project>
+@{
+    ViewData["Title"] = "Portfolio";
+    var courses = ViewBag.Courses as List<portfolio.Models.Course> ?? new();
+    long? selectedCourseId = ViewBag.SelectedCourseId;
+}
+
+<div class="mb-4">
+    <h1 class="fw-bold text-uppercase">Academic Portfolio</h1>
+    <p class="text-secondary">Selected coursework and software engineering projects.</p>
+
+    <div class="d-flex flex-wrap gap-2 mt-3">
+        <a asp-action="Index" asp-route-courseId=""
+           class="btn btn-sm rounded-0 @(selectedCourseId == null ? "btn-dark" : "btn-outline-dark")">
+            All Courses
+        </a>
+        @foreach (var c in courses)
+        {
+            <a asp-action="Index" asp-route-courseId="@c.CourseId"
+               class="btn btn-sm rounded-0 @(selectedCourseId == c.CourseId ? "btn-dark" : "btn-outline-dark")">
+                @c.Code — @c.Title
+            </a>
+        }
+    </div>
+</div>
+
+@if (Model.Count == 0)
+{
+    <p class="text-muted">No projects found for this course.</p>
+}
+else
+{
+    <div class="row g-4">
+        @foreach (var project in Model)
+        {
+            <div class="col-md-6">
+                <div class="border border-dark p-4 h-100 d-flex flex-column justify-content-between">
+                    <div>
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <span class="badge bg-dark text-white rounded-0">@project.CourseCode</span>
+                            <span class="small text-muted">@project.YearCreated</span>
+                        </div>
+                        <h3 class="h5 fw-bold text-uppercase">@project.Title</h3>
+                        <p class="small text-secondary">@project.Summary</p>
+                    </div>
+                    <div class="pt-3 border-top border-dark mt-3">
+                        <a asp-action="Project" asp-route-id="@project.ProjectId" class="btn btn-dark btn-sm rounded-0">
+                            View Project &rarr;
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

@@ -1,0 +1,62 @@
+﻿@model portfolio.Models.Project
+@{
+    ViewData["Title"] = "New Project";
+}
+
+<h2 class="fw-bold text-uppercase mb-3">Add Project</h2>
+
+<form asp-action="Create" method="post" class="border border-dark p-4" style="max-width: 42rem;">
+    <div asp-validation-summary="ModelOnly" class="alert alert-danger rounded-0"></div>
+
+    <div class="mb-3">
+        <label asp-for="CourseId" class="form-label fw-bold text-uppercase small">Course</label>
+        <select asp-for="CourseId" asp-items="ViewBag.Courses" class="form-select rounded-0 border-dark">
+            <option value="">-- Select Course --</option>
+        </select>
+        <span asp-validation-for="CourseId" class="text-danger small"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label fw-bold text-uppercase small">Project Title</label>
+        <input asp-for="Title" class="form-control rounded-0 border-dark" />
+        <span asp-validation-for="Title" class="text-danger small"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="YearCreated" class="form-label fw-bold text-uppercase small">Year Created</label>
+        <input asp-for="YearCreated" class="form-control rounded-0 border-dark" />
+        <span asp-validation-for="YearCreated" class="text-danger small"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Summary" class="form-label fw-bold text-uppercase small">Summary</label>
+        <textarea asp-for="Summary" rows="3" class="form-control rounded-0 border-dark"></textarea>
+        <span asp-validation-for="Summary" class="text-danger small"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="VideoUrl" class="form-label fw-bold text-uppercase small">YouTube Video URL</label>
+        <input asp-for="VideoUrl" class="form-control rounded-0 border-dark" placeholder="https://www.youtube.com/watch?v=..." />
+        <span asp-validation-for="VideoUrl" class="text-danger small"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="RepoUrl" class="form-label fw-bold text-uppercase small">GitHub Repository URL</label>
+        <input asp-for="RepoUrl" class="form-control rounded-0 border-dark" placeholder="https://github.com/..." />
+        <span asp-validation-for="RepoUrl" class="text-danger small"></span>
+    </div>
+
+    <div class="mb-4">
+        <label asp-for="ImageUrlsText" class="form-label fw-bold text-uppercase small">Image URLs (One per line)</label>
+        <textarea asp-for="ImageUrlsText" rows="4" class="form-control rounded-0 border-dark" placeholder="https://..."></textarea>
+        <span asp-validation-for="ImageUrlsText" class="text-danger small"></span>
+        <div class="form-text">If any URL fails or is repeated twice, the entire save will roll back.</div>
+    </div>
+
+    <button type="submit" class="btn btn-dark rounded-0 px-4">Save Project</button>
+    <a asp-action="Index" class="btn btn-link text-dark">Cancel</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

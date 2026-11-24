@@ -1,0 +1,44 @@
+﻿@model portfolio.Models.Project
+@{
+    ViewData["Title"] = Model.Title;
+    var videoId = System.Text.RegularExpressions.Regex.Match(Model.VideoUrl ?? "", @"(?:v=|youtu\.be/|shorts/)([A-Za-z0-9_-]{11})").Groups[1].Value;
+}
+
+<div class="mb-4">
+    <a asp-action="Index" class="text-dark text-decoration-underline small">&larr; Back to Portfolio</a>
+    <div class="mt-2">
+        <span class="badge bg-dark text-white rounded-0">@Model.CourseCode</span>
+        <span class="text-muted small ms-2">@Model.CourseTitle · @Model.YearCreated</span>
+    </div>
+    <h1 class="fw-bold text-uppercase mt-2">@Model.Title</h1>
+    <p class="lead">@Model.Summary</p>
+    @if (!string.IsNullOrEmpty(Model.RepoUrl))
+    {
+        <a href="@Model.RepoUrl" target="_blank" class="btn btn-outline-dark btn-sm rounded-0">View Source Code</a>
+    }
+</div>
+
+@if (videoId != "")
+{
+    <div class="mb-5">
+        <h5 class="text-uppercase fw-bold border-bottom border-dark pb-2">Project Demo</h5>
+        <div class="ratio ratio-16x9 border border-dark" style="max-width: 720px;">
+            <iframe src="https://www.youtube.com/embed/@videoId" title="Project demo" allowfullscreen></iframe>
+        </div>
+    </div>
+}
+
+@if (Model.Images.Count > 0)
+{
+    <h5 class="text-uppercase fw-bold border-bottom border-dark pb-2">Screenshots</h5>
+    <div class="row g-3 mt-1">
+        @foreach (var img in Model.Images)
+        {
+            <div class="col-md-6">
+                <div class="border border-dark p-1">
+                    <img src="@img.ImageUrl" alt="@Model.Title screenshot" class="img-fluid w-100" />
+                </div>
+            </div>
+        }
+    </div>
+}

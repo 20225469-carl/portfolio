@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Editor Sign In";
+}
+
+<div class="mx-auto mt-5 border border-dark p-4" style="max-width: 24rem;">
+    <h2 class="fw-bold text-uppercase h4 mb-3">Editor Sign In</h2>
+
+    @if (ViewBag.Error != null)
+    {
+        <div class="alert alert-danger rounded-0 py-2 small">@ViewBag.Error</div>
+    }
+
+    <form asp-action="Login" method="post">
+        <div class="mb-3">
+            <label for="password" class="form-label fw-bold text-uppercase small">Password</label>
+            <input type="password" name="password" id="password" class="form-control rounded-0 border-dark" required />
+        </div>
+        <button type="submit" class="btn btn-dark rounded-0 w-100">Sign In</button>
+    </form>
+</div>

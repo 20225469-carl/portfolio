@@ -1,0 +1,20 @@
+﻿@* Views/EditorCourses/Delete.cshtml *@
+@model portfolio.Models.Course
+@{
+    ViewData["Title"] = "Delete Course";
+}
+
+<h1 class="fw-bold text-uppercase h3 mb-3">Delete Course</h1>
+
+@if (ViewBag.Error != null)
+{
+    <div class="alert alert-danger rounded-0">@ViewBag.Error</div>
+}
+
+<div class="border border-dark p-4" style="max-width: 36rem;">
+    <p>Are you sure you want to delete <strong>@Model.Code — @Model.Title</strong>?</p>
+    <form asp-action="Delete" asp-route-id="@Model.CourseId" method="post">
+        <button type="submit" class="btn btn-danger rounded-0">Confirm Delete</button>
+        <a asp-action="Index" class="btn btn-link text-dark">Cancel</a>
+    </form>
+</div>

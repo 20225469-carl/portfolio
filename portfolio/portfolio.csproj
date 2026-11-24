@@ -4,7 +4,18 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>9b3f6955-2e36-48f2-a902-2d8e4acabb16</UserSecretsId>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="sql\schema.sql" />
+    <None Remove="sql\seed.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="sql\schema.sql" />
+    <Content Include="sql\seed.sql" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Npgsql" Version="11.0.0" />
