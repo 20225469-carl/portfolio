@@ -1,35 +1,32 @@
-﻿@* Views/EditorProjects/Index.cshtml *@
-@model List<portfolio.Models.Project>
+﻿@model List<portfolio.Models.Course>
 @{
-    ViewData["Title"] = "Manage Projects";
+    ViewData["Title"] = "Manage Courses";
 }
 
 <div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="fw-bold text-uppercase h3 mb-0">Projects</h1>
-    <a asp-action="Create" class="btn btn-dark btn-sm rounded-0">+ Add Project</a>
+    <h1 class="fw-bold text-uppercase h3 mb-0">Courses</h1>
+    <a asp-action="Create" class="btn btn-dark btn-sm rounded-0">+ Add Course</a>
 </div>
 
 <table class="table table-bordered align-middle">
     <thead class="table-dark">
         <tr>
-            <th>Course</th>
+            <th>Code</th>
             <th>Title</th>
-            <th>Year</th>
+            <th>Term</th>
             <th style="width: 12rem;">Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var p in Model)
+        @foreach (var c in Model)
         {
             <tr>
-                <td class="fw-bold">@p.CourseCode</td>
-                <td>@p.Title</td>
-                <td>@p.YearCreated</td>
+                <td class="fw-bold">@c.Code</td>
+                <td>@c.Title</td>
+                <td>@c.Term</td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@p.ProjectId" class="btn btn-sm btn-outline-dark rounded-0">Edit</a>
-                    <form asp-action="Delete" asp-route-id="@p.ProjectId" method="post" class="d-inline">
-                        <button type="submit" class="btn btn-sm btn-outline-danger rounded-0">Delete</button>
-                    </form>
+                    <a asp-action="Edit" asp-route-id="@c.CourseId" class="btn btn-sm btn-outline-dark rounded-0">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@c.CourseId" class="btn btn-sm btn-outline-danger rounded-0">Delete</a>
                 </td>
             </tr>
         }
